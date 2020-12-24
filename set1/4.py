@@ -16,16 +16,15 @@ def breakSingleXor(ciphertext):
 
     return pt, probKey, bestScore
 
-def detectSingleXOR():
-    f = open("4/enc.txt", "r")
-    bestScore = -1
-    lines = f.read().splitlines()
-    for line in lines:
-        text, probKey,score = breakSingleXor(binascii.unhexlify(line))
-        if score > bestScore:
-            pt = text
-            key = probKey
-            bestScore = score
-    return bytes(pt).decode('utf-8'), key, round(bestScore,2)
 
-print(detectSingleXOR())
+with open("4/enc.txt", "r") as f:
+    lines = f.read().splitlines()
+bestScore = -1
+for line in lines:
+    text, probKey,score = breakSingleXor(binascii.unhexlify(line))
+    if score > bestScore:
+        pt = text
+        key = probKey
+        bestScore = score
+print("Plaintext:", bytes(pt).decode('utf-8'), "KEY: ", key)
+

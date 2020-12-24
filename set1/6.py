@@ -73,8 +73,8 @@ def findKey(ciphertext):
     return bytes(key)
 
 
-f = open("6/file.txt")
-text = base64.b64decode(f.read())
+with open("6/file.txt") as f:
+    text = base64.b64decode(f.read())
 print('Possible Key size: ' + str(findKeySize(text)))
 key = findKey(text)
 print('Key: ', bytes(key).decode("utf-8"))

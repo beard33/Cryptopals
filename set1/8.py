@@ -12,8 +12,8 @@ def detectEcbMode(ciphertext):
     
     return False
 
-f = open("8/text.txt")
-text = f.read().splitlines()
+with open("8/text.txt") as f:
+    text = f.read().splitlines()
 for line in text:
     if detectEcbMode(binascii.unhexlify(line)):
         print("Found ECB at line", text.index(line) + 1)

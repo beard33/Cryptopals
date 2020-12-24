@@ -3,8 +3,8 @@ from Crypto.Cipher import AES
 
 
 KEY = b'YELLOW SUBMARINE'
-f = open("7/text.txt")
-ciphertext = b64decode(f.read())
+with open("7/text.txt") as f:
+    ciphertext = b64decode(f.read())
 
 decipher = AES.new(KEY, AES.MODE_ECB)
 print(bytes(decipher.decrypt(ciphertext)).decode("utf-8"))
