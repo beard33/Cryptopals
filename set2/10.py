@@ -10,9 +10,8 @@ def cbcEncrypt(plaintext, key, IV = b'\x00'*BLOCK_SIZE):
     ciphertext = []
     cipher = AES.new(key, AES.MODE_ECB)
     paddedPt = tools.pkcs7Padding(plaintext, BLOCK_SIZE)
-    firstBlock = cipher.encrypt(tools.singleXOR(IV, paddedPt[ :BLOCK_SIZE]))
-    ciphertext += firstBlock
-    previousBlock = firstBlock
+    previousBlock = cipher.encrypt(tools.singleXOR(IV, paddedPt[ :BLOCK_SIZE]))
+    ciphertext += previousBlock
     for i in range(BLOCK_SIZE,len(plaintext), BLOCK_SIZE):
         block = cipher.encrypt(tools.singleXOR(previousBlock, paddedPt[i : i+BLOCK_SIZE]))
         previousBlock = block
